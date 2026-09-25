@@ -75,6 +75,7 @@ const CardDetails = ({ initialWorkout }: { initialWorkout: WorkoutCardData }) =>
 
   const specs = [['Equipment', workout.equipment], ['Difficulty', workout.difficulty], ['Sets', workout.sets], ['Reps', workout.reps], ['Duration', workout.duration], ['Calories', workout.calories], ['Rating', workout.rating]];
   const instructions = workout.instructions.length ? workout.instructions : ['Set up with stable form and controlled breathing.', 'Complete each rep through a comfortable range of motion.', 'Keep your core engaged throughout the movement.', 'Rest, then repeat for the prescribed sets.'];
+  const noticeIsDuplicate = notice.toLowerCase().includes('already');
 
   return (
     <main className="min-h-screen bg-black px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -116,7 +117,7 @@ const CardDetails = ({ initialWorkout }: { initialWorkout: WorkoutCardData }) =>
                   <button type="button" onClick={() => saveWorkout('fitlog-saved', 'Saved for later')} className="rounded-xl border border-zinc-700 bg-black px-5 py-3 text-sm font-bold text-white transition-colors hover:border-[#ccff00] hover:text-[#ccff00]"><svg aria-hidden="true" className="mr-2 inline-block h-4 w-4 align-[-0.2em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>{isSaved ? 'Save again' : 'Save for later'}
                   </button>
                   </div>
-              {notice && <output className="fixed right-6 top-6 z-50 rounded-xl border border-[#ccff00]/40 bg-zinc-900 px-4 py-3 text-sm font-semibold text-[#ccff00] shadow-xl">{notice}</output>}
+              {notice && <output className="fixed right-6 top-6 z-50 inline-flex items-center gap-2 rounded-xl border border-[#ccff00]/40 bg-zinc-900 px-4 py-3 text-sm font-semibold text-[#ccff00] shadow-xl"><svg aria-hidden="true" className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" />{noticeIsDuplicate ? <path d="m9 9 6 6m0-6-6 6" /> : <path d="m8 12 2.5 2.5L16 9" />}</svg><span>{notice}</span></output>}
             </div>
           </div>
         </article>

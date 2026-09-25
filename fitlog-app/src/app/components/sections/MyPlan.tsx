@@ -91,12 +91,12 @@ const MyPlan = () => {
         </div></div>
         <div className="flex shrink-0 flex-wrap items-center gap-3 sm:ml-auto sm:justify-end">
           <Link href={`/workout/${item.id}`} className="rounded-lg border border-zinc-700 px-3 py-2 text-xs font-bold text-[#ccff00] hover:border-[#ccff00] hover:text-[#ccff00]">View Details</Link>
-          {tab === 'plan' && <>
+          {tab === 'plan' &&
             <button type="button" onClick={() => markAsDone(item.id)} className={`rounded-lg px-3 py-2 text-xs font-bold transition-colors ${isDone ? 'bg-[#ccff00]/15 text-[#ccff00]' : 'bg-zinc-800 text-white hover:bg-[#ccff00] hover:text-black'}`}>
               <span aria-hidden="true">✓</span> {isDone ? 'Completed' : 'Mark as done'}
             </button>
-            <button type="button" onClick={() => remove(item.id)} aria-label={`Remove ${item.title}`} title="Remove workout" className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-lg leading-none text-zinc-400 transition-colors hover:border-red-500 hover:text-red-300">&times;</button>
-          </>}
+          }
+          <button type="button" onClick={() => remove(item.id)} aria-label={`Remove ${item.title}`} title="Remove workout" className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-lg leading-none text-zinc-400 transition-colors hover:border-red-500 hover:text-red-300">&times;</button>
         </div>
             </article>; })}
       </div>;
@@ -129,7 +129,7 @@ const MyPlan = () => {
         </label>
       </div>
       {planContent}
-      {notice && <output className="fixed bottom-6 right-6 z-20 rounded-xl border border-[#ccff00]/40 bg-zinc-900 px-4 py-3 text-sm font-semibold text-[#ccff00] shadow-xl">{notice}</output>}
+      {notice && <output className="fixed bottom-6 right-6 z-20 inline-flex items-center gap-2 rounded-xl border border-[#ccff00]/40 bg-zinc-900 px-4 py-3 text-sm font-semibold text-[#ccff00] shadow-xl"><svg aria-hidden="true" className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="m8 12 2.5 2.5L16 9" /></svg><span>{notice}</span></output>}
     </section>
   );
 };

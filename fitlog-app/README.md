@@ -18,28 +18,3 @@ FitLog is a focused workout discovery app for finding exercises, reviewing their
 3. **Today's Plan**: Add exercises to a focused plan with a five-workout limit.
 4. **Save for later**: Keep favorite workouts available in the browser for future sessions.
 5. **Responsive feedback**: Use loading states, error handling, toast notifications, live counters, and a custom not-found page throughout the app.
-
-## API
-
-FitLog reads workout data from the following endpoints:
-
-- All workouts: `https://api.abcz.workers.dev/api/fitlog`
-- One workout: `https://api.abcz.workers.dev/api/fitlog/:id`
-
-## Getting Started
-
-Install dependencies and start the development server:
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Quality Checks
-
-```bash
-npm run lint
-npm run build
-```
