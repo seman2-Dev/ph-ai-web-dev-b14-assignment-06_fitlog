@@ -23,6 +23,7 @@ const MyPlan = () => {
   const [loading, setLoading] = useState(true);
   const [notice, setNotice] = useState('');
   const [sortBy, setSortBy] = useState<SortOption>('duration');
+  const [query, setQuery] = useState('');
   const storageKey = tab === 'plan' ? 'fitlog-plan' : 'fitlog-saved';
 
   useEffect(() => {
@@ -60,7 +61,9 @@ const MyPlan = () => {
 
   const minutes = items.reduce((sum, item) => sum + (Number.parseInt(item.duration, 10) || 0), 0);
   const calories = items.reduce((sum, item) => sum + (Number.parseInt(item.calories, 10) || 0), 0);
-  const sortedItems = [...items].sort((first, second) => Number.parseFloat(first[sortBy]) - Number.parseFloat(second[sortBy]));
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredItems = items.filter((item) => [item.title, item.focus, ...item.categories].some((value) => value.toLowerCase().includes(normalizedQuery)));
+  const sortedItems = [...filteredItems].sort((first, second) => Number.parseFloat(first[sortBy]) - Number.parseFloat(second[sortBy]));
   let planContent;
 
   if (loading) {
@@ -74,6 +77,8 @@ const MyPlan = () => {
       Go to workouts
       </Link>
     </div>;
+  } else if (filteredItems.length === 0) {
+    planContent = <div className="rounded-3xl border border-dashed border-zinc-700 bg-zinc-900 p-10 text-center text-zinc-400">No workouts match &quot;{query}&quot;.</div>;
   } else {
     planContent = 
     <div className="grid gap-4 md:grid-cols-1">{sortedItems.map((item) => 
@@ -113,6 +118,10 @@ const MyPlan = () => {
             <p className="text-xs uppercase tracking-[0.15em] text-zinc-500">{label}</p>
             <p className="mt-2 text-2xl font-black text-white">{value}</p>
         </div>)}
+      </div>
+      <div className="mb-6">
+        <label htmlFor="my-plan-search" className="sr-only">Search workouts or tags</label>
+        <input id="my-plan-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search workouts or tags" className="w-full rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-[#ccff00]" />
       </div>
       <div className="mb-6 flex flex-col gap-4 border-b border-zinc-800 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="inline-flex w-fit rounded-xl border border-zinc-700 bg-zinc-900 p-1">

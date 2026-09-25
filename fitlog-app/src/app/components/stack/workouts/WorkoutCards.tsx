@@ -23,6 +23,7 @@ const Cards = () => {
     const [workouts, setWorkouts] = useState<WorkoutCardData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [query, setQuery] = useState('');
     useEffect(() => {
         const fetchWorkouts = async () => {
             try {
@@ -44,6 +45,9 @@ const Cards = () => {
         fetchWorkouts();
     }, []);
 
+    const normalizedQuery = query.trim().toLowerCase();
+    const filteredWorkouts = workouts.filter((workout) => [workout.title, workout.focus, ...workout.categories].some((value) => value.toLowerCase().includes(normalizedQuery)));
+
     return (
         <section id="library" className="mx-auto max-w-7xl py-8 sm:py-10 lg:py-12" aria-labelledby="workout-heading">
             <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -52,6 +56,8 @@ const Cards = () => {
                     <p id="workout-heading" className="max-w-xl font-black tracking-tight text-white">
                         Twelve lifts covering every major muscle group.
                     </p>
+                    <label htmlFor="library-search" className="sr-only">Search workouts or tags</label>
+                    <input id="library-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search workouts or tags" className="mt-5 w-full max-w-xl rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-[#ccff00]" />
                 </div>
             </div>
 
@@ -68,8 +74,10 @@ const Cards = () => {
             )}
 
             {!loading && !error && (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {workouts.map((workout) => (
+                filteredWorkouts.length === 0 ? (
+                    <div className="rounded-3xl border border-dashed border-zinc-700 bg-black p-8 text-center text-zinc-400">No workouts match &quot;{query}&quot;.</div>
+                ) : <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {filteredWorkouts.map((workout) => (
                         <Link href={`/workout/${workout.id}`} key={workout.id} className="group block overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ccff00]">
                             <div className="relative h-56 overflow-hidden border-b bg-[#111111] transition duration-300 group-hover:scale-[1.02]">
                                 <Image
