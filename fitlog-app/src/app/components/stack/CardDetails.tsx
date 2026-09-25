@@ -82,28 +82,40 @@ const CardDetails = ({ initialWorkout }: { initialWorkout: WorkoutCardData }) =>
         <Link href="/" className="mb-6 inline-block text-sm font-semibold text-[#ccff00] hover:text-[#ccff00]">← Back to workouts</Link>
         <article className="overflow-hidden rounded-3xl border border-zinc-800 bg-[#111111] shadow-2xl">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative min-h-75 bg-zinc-900"><Image src={workout.image || fallbackImage} alt={workout.title} fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover p-6" /></div>
+            <div className="relative min-h-75 bg-black"><Image src={workout.image || fallbackImage} alt={workout.title} fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover p-6" /></div>
             <div className="p-6 sm:p-8 lg:p-10">
-              <div className="mb-4 flex flex-wrap gap-2">{workout.categories.map((category) => <span key={category} className="rounded-full bg-[#ccff00]/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#ccff00]">{category}</span>)}</div>
-              <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-zinc-400">{workout.focus}</p>
-              <h1 className="text-3xl font-black tracking-tight text-white sm:text-4xl">{workout.title}</h1>
-              <p className="mt-4 leading-relaxed text-zinc-300">{workout.description}</p>
 
-              <div className="mt-7 overflow-hidden rounded-2xl border border-zinc-800 bg-black/60">
+              <h1 className="text-3xl font-black tracking-tight text-white sm:text-4xl">{workout.title}</h1>
+              <p className="mt-4 leading-relaxed text-zinc-300">{workout.description}</p><br />
+              <div className="mb-4 flex flex-wrap gap-2">{workout.categories.map((category) => <span key={category} className="rounded-full bg-[#ccff00] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-black">{category}</span>)}</div>
+              
+              <div className="mt-7 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
                 <table className="w-full text-left">
                   <tbody>
                     {specs.map(([label, value]) => (
                       <tr key={label} className="border-b border-zinc-800 last:border-b-0">
-                        <th scope="row" className="w-1/2 border-r border-zinc-700 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">{label}</th>
-                        <td className="px-4 py-3 text-sm font-semibold text-white">{value}</td>
+                        <th scope="row" className="w-1/2  px-4 py-3 text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">{label}</th>
+                        <td className="px-4 py-3 text-sm text-right font-semibold text-white justify-end">{value}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
 
-              <div className="mt-8"><h2 className="text-sm font-bold uppercase tracking-[0.2em] text-[#ccff00]">Instructions</h2><ol className="mt-4 space-y-3">{instructions.map((instruction, index) => <li key={`${index}-${instruction}`} className="flex gap-3 text-sm leading-relaxed text-zinc-300"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-xs font-bold text-[#ccff00]">{index + 1}</span><span>{instruction}</span></li>)}</ol></div>
-              <div className="mt-8 flex flex-wrap gap-3"><button type="button" disabled={planFull && !isInPlan} onClick={() => saveWorkout('fitlog-plan', "Added to today's plan")} className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold text-black transition-colors hover:bg-[#ccff00] disabled:cursor-not-allowed disabled:opacity-50"><span aria-hidden="true">＋</span> {planFull && !isInPlan ? 'Plan is full' : "Add to today's plan"}</button><button type="button" onClick={() => saveWorkout('fitlog-saved', 'Saved for later')} className="rounded-xl border border-zinc-700 bg-black px-5 py-3 text-sm font-bold text-white transition-colors hover:border-[#ccff00] hover:text-[#ccff00]"><span aria-hidden="true">☆</span> {isSaved ? 'Save again' : 'Save for later'}</button></div>
+              <div className="mt-8"><h2 className="text-sm font-bold uppercase tracking-[0.2em] text-[#ccff00]">Instructions</h2>
+              <ol className="mt-4 space-y-3">{instructions.map((instruction, index) => <li key={`${index}-${instruction}`} className="flex gap-3 text-sm leading-relaxed text-zinc-300">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-xs font-bold text-[#ccff00]">{index + 1}</span>
+              <span>{instruction}</span>
+              </li>)}
+              </ol>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button type="button" disabled={planFull && !isInPlan} onClick={() => saveWorkout('fitlog-plan', "Added to today's plan")} className="rounded-xl bg-[#ccff00] px-5 py-3 text-sm font-bold text-black transition-colors hover:bg-[#ccff00] disabled:cursor-not-allowed disabled:opacity-50">
+                  <span aria-hidden="true">＋</span> {planFull && !isInPlan ? 'Plan is full' : "Add to today's plan"}
+                </button>
+                  <button type="button" onClick={() => saveWorkout('fitlog-saved', 'Saved for later')} className="rounded-xl border border-zinc-700 bg-black px-5 py-3 text-sm font-bold text-white transition-colors hover:border-[#ccff00] hover:text-[#ccff00]"><svg aria-hidden="true" className="mr-2 inline-block h-4 w-4 align-[-0.2em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>{isSaved ? 'Save again' : 'Save for later'}
+                  </button>
+                  </div>
               {notice && <output className="fixed right-6 top-6 z-50 rounded-xl border border-[#ccff00]/40 bg-zinc-900 px-4 py-3 text-sm font-semibold text-[#ccff00] shadow-xl">{notice}</output>}
             </div>
           </div>

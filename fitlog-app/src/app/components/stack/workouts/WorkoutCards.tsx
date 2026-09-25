@@ -71,7 +71,7 @@ const Cards = () => {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {workouts.map((workout) => (
                         <Link href={`/workout/${workout.id}`} key={workout.id} className="group block overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ccff00]">
-                            <div className="relative h-56 overflow-hidden border-b border-[#ccff00] bg-zinc-800">
+                            <div className="relative h-56 overflow-hidden border-b bg-[#111111] transition duration-300 group-hover:scale-[1.02]">
                                 <Image
                                     src={workout.image || fallbackImage}
                                     alt={`${workout.title} exercise illustration`}
@@ -94,10 +94,10 @@ const Cards = () => {
                                 <h3 className="text-xl font-black tracking-tight text-white">{workout.title}</h3>
                                 <p className="mb-2 text-sm font-medium text-zinc-400">{workout.focus}</p>
 
-                                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-400">
-                                    <span className="flex items-center gap-1.5"><StatIcon type="clock" />{workout.duration}</span>
-                                    <span className="flex items-center gap-1.5"><StatIcon type="flame" />{workout.calories}</span>
-                                    <span className="flex items-center gap-1.5"><StatIcon type="star" />{workout.rating}</span>
+                                <div className="mt-5 flex flex-nowrap items-center gap-2 overflow-x-auto text-xs text-zinc-300 border border-zinc-800">
+                                    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5"><StatIcon type="clock" />{workout.duration}</span>
+                                    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full  px-3 py-1.5"><StatIcon type="flame" />{workout.calories}</span>
+                                    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5"><StatIcon type="star" />{workout.rating}</span>
                                 </div>
 
                             </div>
