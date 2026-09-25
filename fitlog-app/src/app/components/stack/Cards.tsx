@@ -1,1 +1,1 @@
-export { default } from './workouts/Cards';
+export { default } from './workouts/WorkoutCards';
