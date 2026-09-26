@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import heroImg from '../../../assets/banner.png';
+
+const heroImg = '/assets/banner.png';
 
 const Hero = () => {
     return (

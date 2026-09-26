@@ -21,6 +21,9 @@ const oswald = Oswald({
 export const metadata = {
   title: "FitLog | Workout Library",
   description: "A dark, no-nonsense workout library and training plan tracker.",
+  icons: {
+    icon: "/assets/logo.png",
+  }
 };
 
 export default function RootLayout({ children }) {

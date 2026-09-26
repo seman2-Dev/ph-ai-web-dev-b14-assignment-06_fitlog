@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import fallbackImage from '../../../assets/banner.png';
 import { fetchWorkoutById } from './api';
 import type { WorkoutCardData } from '../../types/types';
+
+const fallbackImage = '/assets/banner.png';
 
 const CardDetails = ({ initialWorkout }: { initialWorkout: WorkoutCardData }) => {
   const params = useParams();

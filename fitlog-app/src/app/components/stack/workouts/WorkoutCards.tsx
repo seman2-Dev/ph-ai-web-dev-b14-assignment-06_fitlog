@@ -3,9 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import fallbackImage from '../../../../assets/banner.png';
 import { API_URL, formatWorkout } from '../api';
 import type { WorkoutCardData } from '../../../types/types';
+
+const fallbackImage = '/assets/banner.png';
 
 const StatIcon = ({ type }: { type: string }) => {
     if (type === 'clock') {

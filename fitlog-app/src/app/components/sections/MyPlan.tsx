@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import fallbackImage from '../../../assets/banner.png';
 import type { WorkoutCardData } from '../../types/types';
+
+const fallbackImage = '/assets/banner.png';
 
 type Tab = 'plan' | 'saved';
 type SortOption = 'duration' | 'calories' | 'rating';
